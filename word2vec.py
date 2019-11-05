@@ -108,7 +108,7 @@ def negSamplingLossAndGradient(
     # Negative sampling of words is done for you. Do not modify this if you
     # wish to match the autograder and receive points!
     negSampleWordIndices = getNegativeSamples(outsideWordIdx, dataset, K)
-    indices = [outsideWordIdx] + negSampleWordIndices
+    #indices = [outsideWordIdx] + negSampleWordIndices
 
     y_neg = np.dot(outsideVectors[negSampleWordIndices], centerWordVec)
     y_out = np.dot(outsideVectors[outsideWordIdx], centerWordVec)
@@ -174,13 +174,13 @@ def skipgram(currentCenterWord, windowSize, outsideWords, word2Ind,
     gradOutsideVectors = np.zeros(outsideVectors.shape)
 
     ### YOUR CODE HERE
-    currentCenterWordVectors = centerWordVectors[word2Ind[currentCenterWord]]
-    outWordIndexes = [word2Ind[word] for word in outsideWords]
-    for word in outWordIndexes:
+    centerWordIndex = word2Ind[currentCenterWord]
+    currentCenterWordVectors = centerWordVectors[centerWordIndex]
+    for word in outsideWords:
         temp_loss, temp_gradCenterVecs, temp_GradOutsideVectors = \
-            word2vecLossAndGradient(currentCenterWordVectors, word, outsideVectors, dataset)
+            word2vecLossAndGradient(currentCenterWordVectors, word2Ind[word], outsideVectors, dataset)
         loss += temp_loss
-        gradCenterVecs[word2Ind[currentCenterWord]] += temp_gradCenterVecs
+        gradCenterVecs[centerWordIndex] += temp_gradCenterVecs
         gradOutsideVectors += temp_GradOutsideVectors
 
 
