@@ -17,7 +17,7 @@ def sigmoid(x):
     """
 
     ### YOUR CODE HERE
-    return 1/1+np.exp(-x)
+    s = 1/1+np.exp(-x)
     ### END YOUR CODE
 
     return s
@@ -53,9 +53,13 @@ def naiveSoftmaxLossAndGradient(
     """
 
     ### YOUR CODE HERE
-    loss = softmax(np.dot(outsideVectors, np.transpose(centerWordVec)))
-    gradCenterVec = 0
-    gradOutsideVecs = 0
+    y_hat = softmax(np.dot(centerWordVec, outsideVectors.T))
+    delta = y_hat.copy()
+    delta[outsideWordIdx] -= 1
+
+    loss = -np.log(y_hat)[outsideWordIdx]
+    gradCenterVec = np.dot(delta, outsideVectors)
+    gradOutsideVecs = np.dot(delta[:, np.newaxis], centerWordVec[np.newaxis, :])
 
 
     ### Please use the provided softmax function (imported earlier in this file)
