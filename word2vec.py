@@ -17,7 +17,7 @@ def sigmoid(x):
     """
 
     ### YOUR CODE HERE
-    s = 1/1+np.exp(-x)
+    s = 1./(1. +np.exp(-x))
     ### END YOUR CODE
 
     return s
@@ -53,7 +53,7 @@ def naiveSoftmaxLossAndGradient(
     """
 
     ### YOUR CODE HERE
-    y_hat = softmax(np.dot(centerWordVec, outsideVectors.T))
+    y_hat = softmax(np.dot(centerWordVec, np.transpose(outsideVectors)))
     delta = y_hat.copy()
     delta[outsideWordIdx] -= 1
 
@@ -110,6 +110,24 @@ def negSamplingLossAndGradient(
     negSampleWordIndices = getNegativeSamples(outsideWordIdx, dataset, K)
     indices = [outsideWordIdx] + negSampleWordIndices
 
+    y_neg = np.dot(outsideVectors[negSampleWordIndices], centerWordVec)
+    y_out = np.dot(outsideVectors[outsideWordIdx], centerWordVec)
+
+    z_neg = sigmoid(- y_neg)
+    z_out = sigmoid(y_out)
+
+    loss = - (np.log(z_out) + np.sum(np.log(z_neg)))
+    gradCenterVec = (z_out - 1) * outsideVectors[outsideWordIdx] + \
+                    np.sum((1 - z_neg)[:, np.newaxis] * outsideVectors[negSampleWordIndices], axis=0)
+
+    gradOutsideVecs = np.zeros_like(outsideVectors)
+    gradOutsideVecs[outsideWordIdx] = (z_out - 1) * centerWordVec
+
+    for neg, neg_index in enumerate(negSampleWordIndices):
+        gradOutsideVecs[neg_index] += (1 - z_neg[neg]) * centerWordVec
+
+
+
     ### YOUR CODE HERE
 
     ### Please use your implementation of sigmoid in here.
@@ -156,6 +174,15 @@ def skipgram(currentCenterWord, windowSize, outsideWords, word2Ind,
     gradOutsideVectors = np.zeros(outsideVectors.shape)
 
     ### YOUR CODE HERE
+    currentCenterWordVectors = centerWordVectors[word2Ind[currentCenterWord]]
+    outWordIndexes = [word2Ind[word] for word in outsideWords]
+    for word in outWordIndexes:
+        temp_loss, temp_gradCenterVecs, temp_GradOutsideVectors = \
+            word2vecLossAndGradient(currentCenterWordVectors, word, outsideVectors, dataset)
+        loss += temp_loss
+        gradCenterVecs[word2Ind[currentCenterWord]] += temp_gradCenterVecs
+        gradOutsideVectors += temp_GradOutsideVectors
+
 
     ### END YOUR CODE
 
