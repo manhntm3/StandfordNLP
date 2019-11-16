@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d28879d3-3ef3-4f9f-b0bc-d4245b4fe3c0" name="Default Changelist" comment="add skipgram">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sgd.py" beforeDir="false" afterPath="$PROJECT_DIR$/sgd.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word2vec.py" beforeDir="false" afterPath="$PROJECT_DIR$/word2vec.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2/.idea/a2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/a2/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,7 +19,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/a2" />
   </component>
   <component name="ProjectId" id="1T9Vrr1D6yXS3FJsuQeXzMNpzvU" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -59,7 +65,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

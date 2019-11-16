@@ -1,1 +1,4 @@
 utils/datasets
+*pickle
+*npy
+a2/utils/datasets
